@@ -1,45 +1,51 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Force-Cropped YouTube Embed</title>
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        background: black;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-      }
-
-      .container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-
-      .container iframe {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%) scale(1.20); /* <== Tweak this scale */
-        transform-origin: center center;
-        border: none;
-      }
-    </style>
-  </head>
-  <body>
-     <div class="container">
-     <!-- ✅ Confirmed embeddable Nantucket livestreams -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nantucket Live Cams Rotator</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: scale(1.2);
+      transform-origin: center center;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      border: none;
+      z-index: 0;
+    }
+    .active {
+      opacity: 1;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- ✅ Confirmed embeddable Nantucket livestreams -->
   <iframe class="cam active" src="https://camstreamer.com/embed/tubHlaTD9DtBfb6wG1aItArYWbCyIs4RMCJiQ7PM?autoplay=1&mute=1" allow="autoplay" allowfullscreen></iframe>
   <iframe class="cam" src="https://camstreamer.com/embed/4uy8MbBrGKY0YLTycBf6AqMF6VzhVKrVVS1HMp8u?autoplay=1&mute=1" allow="autoplay" allowfullscreen></iframe>
   <iframe class="cam" src="https://www.youtube.com/embed/kZxZU0I2M98?autoplay=1&mute=1&controls=0&rel=0" allow="autoplay" allowfullscreen></iframe>
   <iframe class="cam" src="https://iframe.dacast.com/live/0759cb25-9bf8-8280-33db-98a7926bc8ea/2f631e51-2e57-a518-3bd0-80790e79b9d8" allow="autoplay" allowfullscreen></iframe>
   <iframe class="cam" src="https://www.youtube.com/embed/KW7NyTgZwyA?autoplay=1&mute=1&controls=0&rel=0" allow="autoplay" allowfullscreen></iframe>
-    </div>
-  </body>
+  <script>
+    const cams = document.querySelectorAll('.cam');
+    let index = 0;
+    setInterval(() => {
+      cams[index].classList.remove('active');
+      index = (index + 1) % cams.length;
+      cams[index].classList.add('active');
+    }, 10000); // 10 seconds per stream
+  </script>
+</body>
 </html>
