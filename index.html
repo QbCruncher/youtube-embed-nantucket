@@ -46,6 +46,15 @@
       index = (index + 1) % cams.length;
       cams[index].classList.add('active');
     }, 10000); // 10 seconds per stream
+    // Every 8 hours, refresh the current stream
+setInterval(() => {
+  const currentFrame = cams[index];
+  const src = currentFrame.src;
+  currentFrame.src = ''; // force unload
+  setTimeout(() => {
+    currentFrame.src = src; // force reload stream
+  }, 100);
+}, 8 * 60 * 60 * 1000); // 8 hours
   </script>
 </body>
 </html>
