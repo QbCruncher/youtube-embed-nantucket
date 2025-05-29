@@ -82,13 +82,13 @@
       cams[index].classList.add('active');
     },10_000);
 
-    /* Force-refresh current stream every 8 h to prevent long-session freezes */
+    /* Force-refresh current stream every 2 h to prevent long-session freezes */
     setInterval(()=>{
       const frame = cams[index];
       const src   = frame.src;
       frame.src = '';
       setTimeout(()=>{ frame.src = src; },100);
-    },8*60*60*1000);
+    },2*60*60*1000);
   </script>
 </body>
 </html>
